@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard</title>
+  <style>
+    html, body {
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, #ffeaea 0%, #fff6f6 100%);
+      color: #a1001a;
+      min-height: 100vh;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { display: none !important; }
+    header {
+      background: rgba(255,255,255,0.95);
+      color: #2a2a2a;
+      padding: 18px 32px 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e3e9ef;
+      box-shadow: 0 2px 12px #e3e9ef88;
+      backdrop-filter: blur(2px);
+    }
+    header h1 {
+      color: #2a2a2a;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 0 #fff, 0 2px 8px #eaf6fb;
+    }
+    header a.logout {
+      background: #e3e9ef;
+      color: #2a2a2a;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      border: 1px solid #cfd8df;
+      transition: background 0.2s, color 0.2s;
+    }
+    header a.logout:hover {
+      background: #bcd2e8;
+      color: #2a2a2a;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 100px auto 32px auto;
+      padding: 32px 20px;
+      background: rgba(255,255,255,0.97);
+      border-radius: 12px;
+      box-shadow: 0 4px 24px #ffd6d655;
+      border: 1px solid #ffd6d6;
+      min-height: 60vh;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #d90429;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      letter-spacing: 1px;
+      font-weight: 600;
+      text-shadow: 0 1px 0 #fff, 0 2px 8px #ffeaea;
+    }
+    .section {
+      margin-bottom: 40px;
+      background: #fff0f0;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #ffd6d655;
+      padding: 24px 18px;
+      border: 1px solid #ffd6d6;
+    }
+    .section-title {
+      color: #d90429;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 18px;
+    }
+    th, td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #ffd6d6;
+      text-align: left;
+      font-size: 1rem;
+    }
+    th {
+      background: #ffd6d6;
+      color: #a1001a;
+      font-weight: 700;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .land-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: flex-start;
+    }
+    .land-card {
+      background: #fff0f0;
+      border-left: 4px solid #d90429;
+      padding: 18px 18px 16px 18px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 2px 12px #ffd6d655;
+      width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .land-card img {
+      width: 100%;
+      max-width: 300px;
+      max-height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px #ffd6d655;
+    }
+    .land-card h3 {
+      margin: 0 0 10px;
+      color: #d90429;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      font-weight: 600;
+      text-shadow: 0 1px 0 #fff, 0 2px 8px #ffeaea;
+    }
+    .land-card p {
+      margin: 5px 0;
+      font-size: 15px;
+      color: #a1001a;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    }
+    @media (max-width: 900px) {
+      .container { max-width: 98vw; margin: 80px 2vw 20px 2vw; padding: 10px 4px; }
+      .land-list { max-width: 98vw; }
+      .land-card { width: 98vw; max-width: 340px; }
+    }
+    @media (max-width: 600px) {
+      header { padding: 8px 4px 8px 4px !important; }
+      .container { margin: 60px 1vw 10px 1vw; padding: 2px; min-width: 98vw; }
+      .land-list { max-width: 98vw; }
+      .land-card { width: 98vw; max-width: 98vw; }
+      h2 { font-size: 1.1rem; }
+      .land-card h3 { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body style="min-height:100vh; display:flex; flex-direction:column; margin:0; position:relative; overflow:auto;">
+  <header>
+    <div style="display: flex; align-items: center; gap: 10px; justify-self: start;">
+      <img src="https://img.icons8.com/ios-filled/50/d90429/administrator-male.png" alt="Logo" style="height:32px; width:32px; object-fit:contain;">
+      <span style="font-size: 1.25rem; font-weight:600; letter-spacing:1px; color:#d90429; line-height:1;">Smart Land Dealing</span>
+    </div>
+    <span style="font-size:1.05rem; color:#a1001a; line-height:1;">Welcome, <b style='color:#d90429; font-weight:600; font-size:1.05rem; line-height:1;'><%= name %></b></span>
+    <a href="/user/login" class="logout" onclick="return confirm('Are you sure you want to logout?')" style="font-size:1.05rem; padding:6px 16px; height:32px; display:flex; align-items:center;">Logout</a>
+  </header>
+  <div class="container">
+    <h2>Admin Dashboard</h2>
+    <!-- Users Section -->
+    <div class="section">
+      <div class="section-title">All Users</div>
+      <% if (users && users.length > 0) { %>
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Mobile</th><th>Registered At</th></tr>
+          </thead>
+          <tbody>
+            <% users.forEach(function(user) { %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.mobile %></td>
+                <td><%= user.registerdAt ? user.registerdAt.toLocaleString() : '' %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <p>No users found.</p>
+      <% } %>
+    </div>
+    <!-- Landowners Section -->
+    <div class="section">
+      <div class="section-title">All Landowners</div>
+      <% if (landowners && landowners.length > 0) { %>
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Mobile</th><th>Registered At</th></tr>
+          </thead>
+          <tbody>
+            <% landowners.forEach(function(owner) { %>
+              <tr>
+                <td><%= owner.name %></td>
+                <td><%= owner.email %></td>
+                <td><%= owner.mobile %></td>
+                <td><%= owner.registerdAt ? owner.registerdAt.toLocaleString() : '' %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <p>No landowners found.</p>
+      <% } %>
+    </div>
+    <!-- Lands Section -->
+    <div class="section">
+      <div class="section-title">All Lands</div>
+      <div class="land-list">
+        <% if (lands && lands.length > 0) { lands.forEach(function(land) { %>
+          <div class="land-card">
+            <% if (land.imageUrl) { %>
+              <img src="<%= land.imageUrl %>" alt="Land Image" />
+            <% } %>
+            <h3><%= land.landTitle %></h3>
+            <p><b>Owner:</b> <%= land.owner && land.owner.name ? land.owner.name : 'N/A' %> (<%= land.owner && land.owner.email ? land.owner.email : '' %>)</p>
+            <p><b>Location:</b> <%= land.address.street %>, <%= land.address.city %>, <%= land.address.state %> - <%= land.address.pincode %></p>
+            <p><b>Area:</b> <%= land.areaInSqFt %> sq ft</p>
+            <p><b>Price:</b> ₹<%= land.price %></p>
+            <p><b>Description:</b> <%= land.description %></p>
+            <p><b>Latitude:</b> <%= land.location.latitude %> &nbsp; <b>Longitude:</b> <%= land.location.longitude %></p>
+          </div>
+        <% }) } else { %>
+          <p>No lands found.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <footer style="background:rgba(255,255,255,0.97); color:#d90429; text-align:center; padding:18px 0 16px 0; font-size:1rem; width:100%; margin-top:auto; border-top:1px solid #ffd6d6; box-shadow:0 -2px 12px #ffd6d655; z-index:10; position:relative;">
+    <span style="font-weight:500; color:#d90429;">&copy; <%= new Date().getFullYear() %> Smart Land Dealing</span> &mdash; All rights reserved.
+  </footer>
+</body>
+</html>

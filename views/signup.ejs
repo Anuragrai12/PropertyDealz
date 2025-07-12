@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-box {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333333;
+    }
+
+    .form-box input,
+    .form-box select,
+    .form-box button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .form-box input:focus,
+    .form-box select:focus {
+      outline: none;
+      border-color: #999999;
+    }
+
+    .form-box button {
+      background-color: #4b5563;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-box button:hover {
+      background-color: #374151;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-box">
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div style="background:#ffeaea; color:#d90429; border:1px solid #d90429; border-radius:6px; padding:10px 16px; margin-bottom:18px; text-align:center; font-weight:600;">
+        <%= error %>
+      </div>
+    <% } %>
+    <h2>Sign Up</h2>
+    <form action="signup" method="POST">
+      <input name="name" type="text" placeholder="Full Name" required />
+      <input name="mobile" type="text" placeholder="Mobile Number" required />
+      <input name="email" type="email" placeholder="Email Address" required />
+      <input name="password" type="password" placeholder="Password" required />
+      <select name="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="user">User</option>
+        <option value="landOwner">Land Owner</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button type="submit">Create Account</button>
+    </form>
+  </div>
+
+</body>
+</html>
