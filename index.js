@@ -13,7 +13,8 @@ app.set('view engine', 'ejs');
 // Serve uploaded images statically
 app.use('/uploads', express.static(require('path').join(__dirname, 'uploads')));
 
-const mongoURL = process.env.MONGODB_URL_LOCAL;
+//const mongoURL = process.env.MONGODB_URL_LOCAL;
+const mongoURL = process.env.MONGODB_URL;
 
 mongoose.connect(mongoURL, {
   useNewUrlParser: true,
@@ -43,4 +44,5 @@ const { adminDashboard } = require('./controller/authController');
 const { jwtAuthMiddleware, adminOnly } = require('./middleware/jwt');
 app.get('/admindashboard', jwtAuthMiddleware, adminOnly, adminDashboard);
 
-app.listen(3000, () => console.log('Server running at http://localhost:3000'));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
